@@ -11,8 +11,11 @@ pipeline {
         stage('Deploy to EC2') {
             steps {
                 echo 'Starting SCP transfer...'
-                // Call the batch file for deployment
-                bat 'D:\\Work\\WordpressProject\\scp_deploy.bat'
+                // Run SCP command directly
+                bat '''
+                timeout /t 300 /nobreak > nul
+                scp -v -i D:\\Work\\Keys\\WordpressProjectKey.pem -r * ubuntu@3.81.216.116:/var/www/html/
+                '''
                 echo 'SCP transfer completed.'
             }
         }
