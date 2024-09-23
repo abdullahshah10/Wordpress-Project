@@ -4,7 +4,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Pull the latest code from the GitHub repository
-                git branch: 'main', url: 'https://github.com/abdullahshah10/Wordpress-Project.git'
+                git branch: 'master', url: 'https://github.com/abdullahshah10/Wordpress-Project.git'
             }
         }
 
