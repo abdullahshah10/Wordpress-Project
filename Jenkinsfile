@@ -10,15 +10,16 @@ pipeline {
 
         stage('Deploy to EC2') {
             steps {
-                // Deploy code to your live WordPress EC2 instance using SCP
-                bat '''
-                scp -i D:\\Work\\Keys\\WordpressProjectKey.pem -r * ubuntu@3.81.216.116:/var/www/html/
-                '''
+                echo 'Starting SCP transfer...'
+                // Call the batch file for deployment
+                bat 'D:\\Work\\WordpressProject\\scp_deploy.bat'
+                echo 'SCP transfer completed.'
             }
         }
 
         stage('Test on EC2') {
             steps {
+                echo 'Running PHP syntax check on EC2...'
                 // SSH into EC2 and run PHP syntax check
                 bat '''
                 ssh -i D:\\Work\\Keys\\WordpressProjectKey.pem ubuntu@3.81.216.116 "php -l /var/www/html/index.php"
