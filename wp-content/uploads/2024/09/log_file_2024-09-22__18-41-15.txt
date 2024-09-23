@@ -1,0 +1,63 @@
+
+---Downloaded files---
+The import files for: Demo Import 1 were successfully downloaded!
+Initial max execution time = 30
+Files info:
+Site URL = http://54.242.126.156
+Data file = /var/www/html/wp-content/themes/meika/inc/ocdi/content.xml
+Widget file = /var/www/html/wp-content/themes/meika/inc/ocdi/widgets.wie
+Customizer file = /var/www/html/wp-content/themes/meika/inc/ocdi/customizer.dat
+Redux files:
+meika_data -> /var/www/html/wp-content/themes/meika/inc/ocdi/redux.json 
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+---Importing widgets---
+Footer One : 
+
+Custom HTML - No Title - Imported
+Mailchimp Sign-Up Form - No Title - Imported
+Custom HTML - No Title - Imported
+
+Footer Two : 
+
+Navigation Menu - Follow Me - Imported
+
+Footer Three : 
+
+Navigation Menu - Top Links - Imported
+
+Footer Four : 
+
+Navigation Menu - Explore - Imported
+
+Service Sidebar : 
+
+Custom HTML - No Title - Imported
+
+Sidebar : 
+
+Search - Search - Imported
+Custom HTML - About Us - Imported
+Recent Posts With Thumbnails - Recent Posts - Imported
+Custom HTML - Follow Us - Imported
+Categories - Categories - Imported
+Tag Cloud - Tags - Imported
+
+
+
+---Importing Redux settings---
+Redux settings import for: meika_data finished successfully!
+
+---Importing customizer settings---
+Customizer settings import finished!
+
+---ocdi/after_import---
+
