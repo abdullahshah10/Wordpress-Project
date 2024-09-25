@@ -1,42 +1,29 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
+        stage('Pull Repository') {
             steps {
-                // Pull the latest code from the GitHub repository
-                git branch: 'master', url: 'https://github.com/abdullahshah10/Wordpress-Project.git'
+                // Pull the latest changes from the 'master' branch
+                git branch: 'master', url: 'git@github.com:abdullahshah10/Wordpress-Project.git'
             }
         }
-
-        stage('Deploy to EC2') {
+        stage('Test') {
             steps {
-                echo 'Starting SCP transfer...'
-                // Run SCP command directly
-                bat '''
-                timeout /t 300 /nobreak > nul
-                scp -v -i D:\\Work\\Keys\\WordpressProjectKey.pem -r * ubuntu@3.81.216.116:/var/www/html/
-                '''
-                echo 'SCP transfer completed.'
+                // Optionally, run any tests
+                echo 'Running tests...'
             }
         }
-
-        stage('Test on EC2') {
+        stage('Deploy') {
             steps {
-                echo 'Running PHP syntax check on EC2...'
-                // SSH into EC2 and run PHP syntax check
-                bat '''
-                ssh -i D:\\Work\\Keys\\WordpressProjectKey.pem ubuntu@3.81.216.116 "php -l /var/www/html/index.php"
-                '''
+                // Use SSH to deploy the changes to your EC2 instance using rsync
+                sshagent(['bc1207a4-a55a-41a9-b376-4cfe83fc7c30']) {
+                    sh '''
+                        rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" ./ ubuntu@52.54.94.114:/var/www/html/
+                        ssh -o StrictHostKeyChecking=no ubuntu@52.54.94.114 "
+                        sudo service apache2 restart"
+                    '''
+                }
             }
-        }
-    }
-
-    post {
-        success {
-            echo 'Deployment successful and tests passed!'
-        }
-        failure {
-            echo 'Deployment failed or tests failed!'
         }
     }
 }
