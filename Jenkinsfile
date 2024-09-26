@@ -4,28 +4,27 @@ pipeline {
         stage('Pull Repository') {
             steps {
                 // Pull the latest changes from the 'master' branch
-                git branch: 'master', url: 'git@github.com:abdullahshah10/Wordpress-Project.git'
+                git branch: 'master', url: 'https://github.com/abdullahshah10/Wordpress-Project.git'
             }
         }
         stage('Test') {
             steps {
-                // Optionally, run any tests
+                // Run any tests if necessary
                 echo 'Running tests...'
             }
         }
         stage('Deploy') {
             steps {
-                // Use SSH to deploy the changes to your EC2 instance using rsync
-                sshagent(['52.54.94.114']) {
-                    sh '''
-                        rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" ./ ubuntu@52.54.94.114:/var/www/html/
-                        ssh -o StrictHostKeyChecking=no ubuntu@52.54.94.114 "
-                        sudo service apache2 restart"
-                    '''
-                }
+                // Use rsync to sync files to the web directory
+                sh '''
+                    # Change to your Jenkins workspace directory
+                    cd /var/jenkins_home/workspace/Wordpress-Project
+                    
+                    # Sync only changed files to the EC2 instance's web directory
+                    # This command assumes that the EC2 instance's web directory is accessible
+                    rsync -avz --delete --exclude='*.git' . /var/www/html/
+                '''
             }
         }
     }
 }
-
-// test comment
