@@ -38,8 +38,8 @@ define( 'DB_CHARSET', 'utf8' );
 define( 'DB_COLLATE', '' );
 
 
-define( 'WP_HOME', 'http://3.81.216.116' );
-define( 'WP_SITEURL', 'http://3.81.216.116' );
+define( 'WP_HOME', 'http://3.82.7.131' );
+define( 'WP_SITEURL', 'http://3.82.7.131' );
 
 
 
